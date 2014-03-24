@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.2.0.min.css">
+<script src="js/jquery-1.8.2.min.js"></script>
+<script src="js/jquery.mobile-1.2.0.min.js"></script>
+
+<script type="text/javascript">
+
+function start(){
+document.getElementById('msg').innerHTML="Dont move and touch the phone!";
+document.getElementById('btn').style.visibility = 'hidden';
+window.addEventListener("devicemotion", function(event){
+		var ax = event.accelerationIncludingGravity.x;
+		var ay = event.accelerationIncludingGravity.y;
+		
+		if(ax<=0){
+
+		document.getElementById('player').play();
+		document.getElementById('msg').innerHTML="The phone has been snatched!!!!!!";
+		}else if(ax>=1){
+		document.getElementById('player').play();
+
+		}else if(ay>=1){
+		document.getElementById('player').play();
+
+		}else if(ay<=0){
+		document.getElementById('player').play();
+
+		}				
+
+},true);
+}
+
+function stop(){
+document.getElementById('player').pause();
+}
+
+function load(){
+document.getElementById('txtn').style.visibility = 'visible';
+document.getElementById('msg').style.visibility = 'hidden';
+
+}
+
+function exitApp() {
+blackberry.app.exit();
+}
+</script>
+</head>
+<body onload="load()">
+<div data-role="page" data-theme="a" id="mainPage">
+	<div data-role="header">
+		<h1>Theif Detector</h1>
+	</div>
+		<div data-role="content">
+	
+<button onClick="start()" id="btn">CLICK TO HOLD</button>
+<center><h1 id="count"></h1><h1 id="msg"></h1></center>
+<audio id="player" src="card.mp3"></audio>
+</div>
+</body>
+
+</html>
